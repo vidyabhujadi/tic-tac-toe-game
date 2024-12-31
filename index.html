@@ -16,7 +16,7 @@
     .board{
         width:fit-content;
         margin: 50px auto;
-        background-color:purple;
+        background-color:red;
         box-shadow: 0 0 10px 5px black;
         padding: 9px;
 
@@ -45,6 +45,17 @@
         box-shadow: 0 0 5px 2px rebeccapurple;
     
     }
+    .reset-button{
+        display: block;
+        margin:0 auto;
+        padding: 10px 20px;
+        background-color: red;
+        border: 1px;
+        color: aliceblue;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -67,6 +78,10 @@
     <div class="box" onclick="selectBox(8)">8</div>
 </div>
 </div>
+
+<button class="reset-button" onclick="resetBoard()">
+    Reset Game
+</button>
 
 <script>
     const board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
@@ -107,10 +122,82 @@
       }
       const currentPlayerElement = document.getElementById("currentPlayer");
       currentPlayerElement.innerText = currentPlayer;
+
+      checkForWinner();
     }
-    
+    function resetBoard(){
+        board.fill(-1);
+        renderBoard();
+
+        currentPlayer = "x";
+        const currentPlayerElement = document.getElementById("currntPlayer");
+        currentPlayerElement.innerText = currentPlayer;
+        }
+        
+        function isPlayerPresent(places,player){
+            // places = [2,4,6]
+            // player = "x" or "0"
+            let result = true;
+
+            places.forEach((place) => {
+                if(board[place]!=player){
+                    result = false;
+                }
+            })
+
+        }
+
+        function checkForWinner(){
+
+            /*
+            winning Position:
+            0,1,2
+            3,4,5
+            6,7,8
+            0,3,6
+            1,4,7
+            2,5,8
+            0,4,8
+            2,4,6
+            */
+
+            if(board[0]=="x" && board[1]=="x" && board[2]=="x"){
+                alert('Player x wins');
+            }else if(board[3]=="x" && board[4]=="x" && board[5]=="x"){
+                alert('Player x wins');
+            }else if(board[6]=="x" && board[7]=="x" && board[8]=="x"){
+            alert('Player x wins');
+            }else if(board[0]=="x" && board[3]=="x" && board[6]=="x"){
+                alert('Player x wins');
+            }else if(board[1]=="x" && board[4]=="x" && board[7]=="x"){
+                alert('Player x wins');
+            }else if(board[2]=="x" && board[5]=="x" && board[8]=="x"){
+                alert('Player x wins');
+            }else if(board[0]=="x" && board[4]=="x" && board[8]=="x"){
+                alert('Player x wins');
+            }else if(board[2]=="x" && board[4]=="x" && board[6]=="x"){
+                alert('Player x wins');
+            }
+
+            if(board[0]=="0" && board[1]=="0" && board[2]=="0"){
+                alert('Player 0 wins');
+            }else if(board[3]=="0" && board[4]=="x" && board[5]=="0"){
+                alert('Player 0 wins');
+            }else if(board[6]=="0" && board[7]=="0" && board[8]=="0"){
+            alert('Player 0 wins');
+            }else if(board[0]=="0" && board[3]=="0" && board[6]=="0"){
+                alert('Player 0 wins');
+            }else if(board[1]=="0" && board[4]=="0" && board[7]=="0"){
+                alert('Player 0 wins');
+            }else if(board[2]=="0" && board[5]=="0" && board[8]=="0"){
+                alert('Player 0 wins');
+            }else if(board[0]=="0" && board[4]=="0" && board[8]=="0"){
+                alert('Player 0 wins');
+            }else if(board[2]=="0" && board[4]=="0" && board[6]=="0"){
+                alert('Player 0 wins');
+            }
+        }
+
 </script>
-
-
 </body>
 </html>
